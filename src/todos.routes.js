@@ -39,4 +39,16 @@ todosRoutes.put('/todos', async (req, res) => {
     })
     return res.status(200).json(todo)
 })
+
+
+todosRoutes.delete("/todos/:id", async (req, res) => {
+    const id = Number(req.params.id) 
+    if (!id) return res.status(400).json('id is required')
+    const idCheck = await prisma.todo.findUnique({where: {id}})
+    if (!idCheck){ return res.status(404).json("Id not found")}
+
+    await prisma.todo.delete({where:{id}})
+
+    return res.status(200).json("Deleted sucessfull").send()
+})
 module.exports = todosRoutes
