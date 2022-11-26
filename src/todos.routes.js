@@ -16,9 +16,9 @@ todosRoutes.post('/todos', async (req, res) => {
 
 })
 
-todosRoutes.get('/todos', (req, res) => {
-    const resposta = allTodos
-    return res.status(200).json(allTodos)
+todosRoutes.get('/todos', async (req, res) => {
+    const results = await prisma.todo.findMany()
+    return res.status(200).json(results)
 })
 
 module.exports = todosRoutes
