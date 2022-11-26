@@ -2,6 +2,7 @@ const express = require('express')
 
 const todosRoutes = express.Router()
 const {PrismaClient} = require('@prisma/client')
+const { response } = require('express')
 
 const prisma = new PrismaClient()
 
@@ -23,6 +24,10 @@ todosRoutes.get('/todos', async (req, res) => {
 
 todosRoutes.put('/todos', async (req, res) => {
     const {id, name, status} = req.body 
+
+    if (!id) return res.status(400).json('id is required')
+    const idCheck = await prisma.todo.findUnique({where: {id}})
+    if (!idCheck){ return res.status(404).json("Id not found")}
     const todo = await prisma.todo.update({
         where: {
             id,
