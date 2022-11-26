@@ -21,4 +21,17 @@ todosRoutes.get('/todos', async (req, res) => {
     return res.status(200).json(results)
 })
 
+todosRoutes.put('/todos', async (req, res) => {
+    const {id, name, status} = req.body 
+    const todo = await prisma.todo.update({
+        where: {
+            id,
+        }, 
+        data: {
+            name,
+            status
+        }
+    })
+    return res.status(200).json(todo)
+})
 module.exports = todosRoutes
