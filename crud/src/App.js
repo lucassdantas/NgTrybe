@@ -1,7 +1,9 @@
 import './App.css';
 import {AiOutlineEdit, AiOutlineDelete} from "react-icons/ai"
+import {useState} from 'react'
 const arrayTodos = [{name: "Limpar", status:false}]
 const Todos = ({todos}) => {
+  const [todos, setTodos] = useState([])
   return (
     <div className="todos">
       {todos.map(todo => {
@@ -26,9 +28,11 @@ function App() {
     <div className="App">
       <header className="container">
         <div className='header'>
-          <h1>Titl</h1>
+          <h1>Title</h1>
         </div>
         <Todos todos={arrayTodos}></Todos>
+        <input className='inputName' type="text" />
+        <button className='newTaskButton'>New Task</button>
       </header>
     </div>
   );
