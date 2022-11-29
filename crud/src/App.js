@@ -21,9 +21,13 @@ const Todos = ({todos}) => {
   )
 }
 function App() {
+  //next step
   return (
     <div className="App">
       <header className="container">
+        <div className='header'>
+          <h1>Title</h1>
+        </div>
         <Todos todos={arrayTodos}></Todos>
       </header>
     </div>
