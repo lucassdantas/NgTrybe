@@ -1,9 +1,9 @@
 import './App.css';
 import {AiOutlineEdit, AiOutlineDelete} from "react-icons/ai"
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
+import axios from 'axios';
 const arrayTodos = [{name: "Limpar", status:false}]
 const Todos = ({todos}) => {
-  const [todos, setTodos] = useState([])
   return (
     <div className="todos">
       {todos.map(todo => {
@@ -23,14 +23,22 @@ const Todos = ({todos}) => {
   )
 }
 function App() {
-  //next step
+  async function getTodos() {
+    const response = await axios.get("http://localhost:3001/todos")
+    setTodos(response.data)
+  }
+
+  const [todos, setTodos] = useState([])
+  useEffect(() => {
+    getTodos()
+  })
   return (
     <div className="App">
       <header className="container">
         <div className='header'>
-          <h1>Title</h1>
+          <h1>Tile</h1>
         </div>
-        <Todos todos={arrayTodos}></Todos>
+        <Todos todos={todos}></Todos>
         <input className='inputName' type="text" />
         <button className='newTaskButton'>New Task</button>
       </header>
