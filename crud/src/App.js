@@ -26,7 +26,7 @@ function App() {
     <div className="App">
       <header className="container">
         <div className='header'>
-          <h1>Title</h1>
+          <h1>Titl</h1>
         </div>
         <Todos todos={arrayTodos}></Todos>
       </header>
