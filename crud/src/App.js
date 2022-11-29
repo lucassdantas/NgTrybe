@@ -2,7 +2,6 @@ import './App.css';
 import {AiOutlineEdit, AiOutlineDelete} from "react-icons/ai"
 import {useState, useEffect} from 'react'
 import axios from 'axios';
-const arrayTodos = [{name: "Limpar", status:false}]
 const Todos = ({todos}) => {
   return (
     <div className="todos">
@@ -29,6 +28,7 @@ function App() {
   }
 
   const [todos, setTodos] = useState([])
+  const [inputValue, setInputValue] = useState("")
   useEffect(() => {
     getTodos()
   })
@@ -39,7 +39,11 @@ function App() {
           <h1>Tile</h1>
         </div>
         <Todos todos={todos}></Todos>
-        <input className='inputName' type="text" />
+        <input 
+          value={inputValue} 
+          onChange={(e) => {setInputValue(e.target.value)}} 
+          className='inputName' 
+          type="text" />
         <button className='newTaskButton'>New Task</button>
       </header>
     </div>
