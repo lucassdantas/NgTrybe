@@ -9,6 +9,7 @@ const prisma = new PrismaClient()
 
 todosRoutes.post('/todos', async (req, res) => {
     const {name, status} = req.body 
+    
     const todo = await prisma.todo.create({data:{
         name, 
         status
