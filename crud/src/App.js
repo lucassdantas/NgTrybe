@@ -4,25 +4,7 @@ import {useState, useEffect} from 'react'
 import axios from 'axios';
 
 function App() {
-  const Todos = ({todos}) => {
-    return (
-      <div className="todos">
-        {todos.map(todo => {
-          return (
-            <div className="todo">
-                <button className='checkbox' style={({backgroundColor: todo.status? "#A879EC":"#FFF"})}></button>
-                <p>{todo.name}</p>
-                <button>
-                  <AiOutlineEdit size={20} color={"#64697b"}></AiOutlineEdit>
-                </button>
-                <button onClick={() => deleteTodo(todo)}>
-                  <AiOutlineDelete size={20} color={"#64697b"}></AiOutlineDelete>
-                </button>
-            </div>) 
-        })}
-      </div>
-    )
-  }
+  
 
   async function handleWithNewButton(){
     setInputVisibility(!inputVisibility)
@@ -43,8 +25,28 @@ function App() {
   }
 
   async function deleteTodo(todo){
-    const response = await axios.delete(`http:/localhost:3001/todos/${todo.id}`)
+    const response = await axios.delete(`http://localhost:3001/todos/${todo.id}`)
     getTodos()
+  }
+
+  const Todos = ({todos}) => {
+    return (
+      <div className="todos">
+        {todos.map(todo => {
+          return (
+            <div className="todo">
+                <button className='checkbox' style={({backgroundColor: todo.status? "#A879EC":"#FFF"})}></button>
+                <p>{todo.name}</p>
+                <button>
+                  <AiOutlineEdit size={20} color={"#64697b"}></AiOutlineEdit>
+                </button>
+                <button onClick={() => deleteTodo(todo)}>
+                  <AiOutlineDelete size={20} color={"#64697b"}></AiOutlineDelete>
+                </button>
+            </div>) 
+        })}
+      </div>
+    )
   }
   const [todos, setTodos] = useState([])
   const [inputValue, setInputValue] = useState("")
@@ -66,13 +68,13 @@ function App() {
           className='inputName' 
           type="text" />
         <button 
-        onClick={inputVisibility? createTodo:handleWithNewButton}
-        className='newTaskButton'>
+          onClick={inputVisibility? createTodo:handleWithNewButton}
+          className='newTaskButton'>
           {inputVisibility ? "Confirm" : "+ New task"}
         </button>
       </header>
     </div>
-  );
+  )
 }
 
 export default App;
